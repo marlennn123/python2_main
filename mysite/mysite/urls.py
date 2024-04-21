@@ -16,8 +16,11 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from allauth.socialaccount.providers.facebook.views import FacebookOAuth2Adapter
+from dj_rest_auth.registration.views import SocialLoginView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('auction.urls'))
+    path('', include('auction.urls')),
+    path('accounts/facebook/login/', SocialLoginView.as_view(adapter_class=FacebookOAuth2Adapter), name='fb_login'),
 ]
